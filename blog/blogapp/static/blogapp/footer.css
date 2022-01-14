@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 footer {
-  background-color: hsl(72, 28%, 21%);
-  /* padding: 5px 4em 14.5em; */
-  padding-top: 5px;
+  background-color: #3f4527;
 }
 
   footer .row {
-      margin: 2em 0;
+      /* margin: 2em 0; */
       font-family: lato;
       color: #fff;
       position: relative;
@@ -129,13 +127,14 @@ footer {
       text-align: center;
       color:#fff;
       font-family: lato;
+      margin: 0;
   }
 
 #owner {
   text-align: center;
-  padding: 20px 0 0px;
   color: #fff;
   font-family: lato;
+  margin: 0;
 }
 
   #owner a {
