@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 footer {
-  background-color: #3f4527;
-  padding: 5px 4em 14.5em;
+  background-color: hsl(72, 28%, 21%);
+  /* padding: 5px 4em 14.5em; */
+  padding-top: 5px;
 }
 
   footer .row {
