@@ -23,7 +23,7 @@ ul {
 
 .bg-steel {
   /* background-color: #48664e; */
-  background-color: rgb(0, 153, 255);
+  background-color: rgb(18, 48, 89);
 }
 
 .site-header .navbar-nav .nav-link {
@@ -96,7 +96,7 @@ a.article-title:hover {
 
 .media{
   /* background-color: blueviolet; */
-  background: url(../images/1.png);
+  background: url(../images/brown.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
