@@ -20,17 +20,6 @@
     <title> FREEBIES </title>
   {% endif %}
 
-  <!-- <script type="text/javascript">
-  $(document).ready(function(){
-    var docHeight = $(window).height();
-    var footerHeight = $('#footer').height();
-    var footerTop = $('#footer').position().top + footerHeight;
-    if (footerTop < docHeight){
-      $('#footer').css('margin-top', 10 + (docHeight - footerTop) + 'px');
-    }
-  });
-
-  </script> -->
 
 </head>
   <body>
@@ -45,7 +34,7 @@
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'blogapp-home' %}">Home</a>
-              <a class="nav-item nav-link" href="{% url 'blogapp-about' %}">About</a>
+              <!-- <a class="nav-item nav-link" href="{% url 'blogapp-about' %}">About</a> -->
             </div>
 
             <!-- Navbar Right Side -->
@@ -79,11 +68,12 @@
         </div>
         <div class="col-md-4">
           <div class="content-section">
-            <h3>Our Sidebar</h3>
-            <p class='text-muted'>You can put any information here you'd like.
+            <h3> Browse FreeBies </h3>
+            <p class='text-muted'>Here is some more from us
               <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Latest Posts</li>
-                <li class="list-group-item list-group-item-light">Discounts</li>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'blogapp-home' %}"> Latest Posts </a></li>
+                <li class="list-group-item list-group-item-light"> <a href="#"> Discounts </a></li>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'blogapp-about' %}"> About Us </a></li>
               </ul>
             </p>
           </div>
@@ -116,6 +106,7 @@
                     <div class="link-cat" >
                         <span class="footer-cat">FreeBies</span>
                     </div>
+
                     <ul class="footer-cat-links">
                         <li><a href=""><span>About Us</span></a></li>
                         <li><a href=""><span> Our Services</span></a></li>
