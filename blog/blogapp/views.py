@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post
-from .forms import PostSearchForm
+from .models import Post, Comment
+from .forms import PostSearchForm, CommentForm
 
 
 def home(request):
@@ -77,6 +77,30 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 def about(request):
     return render(request, 'blogapp/about.html', {'title': 'About'})
+
+
+def post_detail(request, year, month, day, post):
+    post = get_object_or_404 (Post, slug=post,
+                                    status='published',
+                                    publish_year=year,
+                                    publish_month=month,
+                                    publish_day=day)
+    #active comments
+    comments = post.comments.filter(active=True)
+    new_comment = None
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST) #Posted comment
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment = post #assigns current post to this comment
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    return render (request, 'blogapp/post_detail.html',
+                    {'post': post,
+                    'comments': comments,
+                    'new_comment': new_comment,
+                    'comment_form': comment_form})
 
 
 # form = PostSearchForm(request.POST or None)
