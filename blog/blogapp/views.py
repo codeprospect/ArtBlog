@@ -3,7 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Comment
-from .forms import PostSearchForm, CommentForm
+from .forms import PostSearchForm, PostCommentForm
+from django.urls import reverse_lazy, reverse
 
 
 def home(request):
@@ -43,6 +44,20 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class PostCommentView(CreateView):
+    model = Comment
+    form_class = PostCommentForm
+    template_name = 'blogapp/post_comment.html'
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('post-detail', kwargs={'pk':self.kwargs['pk']})
+    # success_url = reverse_lazy('post-detail')
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

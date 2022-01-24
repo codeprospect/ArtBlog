@@ -1,0 +1,14 @@
+{% extends "blogapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <form method="Post">
+      {% csrf_token %}
+      <fieldset class = "form-group">
+        <legend class ="border-bottom mb-4"><b> Comment On This Blog Post </b></legend>
+        {{ form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit"> Add Comment </button>
+      </div>
+    </form>
+{% endblock content %}
