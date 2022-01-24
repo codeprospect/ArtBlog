@@ -18,7 +18,12 @@
         {% endif %}
 
       </div>
-      <h2 class="article-title">{{ object.title }}</h2>
+      <h2 class="article-title">{{ object.title }}</h2> <br>
+
+      {% if object.image %}
+        <img src="{{ object.image.url }}">
+      {% endif %}
+
       <p class="article-content">{{ object.content }}</p>
     </div>
   </article>
@@ -27,7 +32,8 @@
 <h5> Comments </h5>
 
 {% if not post.comments.all %}
-  No comments yet ... <a href="{% url 'post-comment' post.pk %}"> Add A Comment </a>
+  No Comments Yet. <br>
+  <a href="{% url 'post-comment' post.pk %}"> Add A Comment </a>
 {% else %}
 <a href="{% url 'post-comment' post.pk %}"> Add Comment </a> <br><hr>
   {% for comment in post.comments.all %}
