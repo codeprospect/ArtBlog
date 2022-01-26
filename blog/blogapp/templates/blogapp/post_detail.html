@@ -28,6 +28,15 @@
     </div>
   </article>
 
+  <!-- like button -->
+<br><hr>
+<form action="{% url 'post-like' post.pk %}" method="POST">
+  {% csrf_token %}
+  <button type="submit" name="post_id", value="{{ post.id }}"
+  class="btn btn-primary btn-sm"> Like </button> - {{ total_likes }} Likes
+</form>
+
+
 <hr>
 <h5> Comments </h5>
 

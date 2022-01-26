@@ -5,13 +5,19 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post, Comment
 from .forms import PostSearchForm, PostCommentForm
 from django.urls import reverse_lazy, reverse
-
+from django.http import HttpResponseRedirect
 
 def home(request):
     context = {
         'posts': Post.objects.all()
     }
     return render(request, 'blogapp/home.html', context)
+
+
+def LikeView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('post-detail', args=[str(pk)]))
 
 
 class PostListView(ListView):
@@ -35,6 +41,27 @@ class UserPostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+    #
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super(PostDetailView, self).get_context_data
+    #
+    #     # post- name/reference I have given when looking up the post in the DB
+    #     post = get_object_or_404(Post, id=self.kwargs['pk'])
+    #     total_likes = post.total_likes()
+    #     context ["total_likes"] = post.total_likes()
+    #     return context
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        post = get_object_or_404(Post, id=self.kwargs['pk'])
+        liked = False
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        context['total_likes'] = post.total_likes()
+        context['post_is_liked'] = liked
+        return context
+
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):

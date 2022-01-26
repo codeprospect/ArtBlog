@@ -6,10 +6,14 @@ from django.urls import reverse
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    image = models.ImageField(null=True, blank=True, upload_to="images/") 
+    image = models.ImageField(null=True, blank=True, upload_to="images/")
     content = models.TextField()
     date = models.DateTimeField(default = timezone.now)
     author = models.ForeignKey(User, on_delete = models.CASCADE)
+    likes = models.ManyToManyField(User, related_name="blog_posts")
+
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return self.title
