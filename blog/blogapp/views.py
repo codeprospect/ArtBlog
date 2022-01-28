@@ -13,10 +13,17 @@ def home(request):
     }
     return render(request, 'blogapp/home.html', context)
 
-
+#Like Dislike Features
 def LikeView(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
-    post.likes.add(request.user)
+    liked = False
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+        liked = False
+    else:
+        post.likes.add(request.user)
+        liked = True
+
     return HttpResponseRedirect(reverse('post-detail', args=[str(pk)]))
 
 
@@ -41,27 +48,20 @@ class UserPostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
-    #
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super(PostDetailView, self).get_context_data
-    #
-    #     # post- name/reference I have given when looking up the post in the DB
-    #     post = get_object_or_404(Post, id=self.kwargs['pk'])
-    #     total_likes = post.total_likes()
-    #     context ["total_likes"] = post.total_likes()
-    #     return context
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
 
         post = get_object_or_404(Post, id=self.kwargs['pk'])
+        # total_likes = post.total_likes()
+
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
         context['total_likes'] = post.total_likes()
         context['post_is_liked'] = liked
+        context['liked'] = liked
         return context
-
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
