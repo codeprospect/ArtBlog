@@ -2,7 +2,7 @@ html{
   height: 100%;
 }
 body {
-  background: url(../images/pen.jpg);
+  background: url(../images/book.jpg);
   /* background: #fafafa; */
   color: #333333;
   margin-top: 5rem;
@@ -64,7 +64,11 @@ a.article-title:hover {
 .article-img {
   height: 65px;
   width: 65px;
-  margin-right: 16px;
+  object-fit: contain;
+  /* margin-right: 16px; */
+  width: 200px;
+  height: 300px;
+  object-fit: contain;
 }
 
 .article-metadata {
