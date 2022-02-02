@@ -16,10 +16,10 @@ def home(request):
 #Like Dislike Features
 def LikeView(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
-    liked = False
+    # liked = False
     if post.likes.filter(id=request.user.id).exists():
         post.likes.remove(request.user)
-        liked = False
+        # liked = False
     else:
         post.likes.add(request.user)
         liked = True
@@ -53,8 +53,7 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
 
         post = get_object_or_404(Post, id=self.kwargs['pk'])
-        # total_likes = post.total_likes()
-
+        
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True

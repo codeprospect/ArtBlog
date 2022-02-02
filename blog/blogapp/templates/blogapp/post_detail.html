@@ -30,25 +30,21 @@
 
   <!-- like button -->
 <br><hr>
-<form action="{% url 'post-like' post.pk %}" method="POST">
-  {% csrf_token %}
 
-{% if user.is_authnticated %}
-  {% if liked %}
-    <button type="submit" name="post_id", value="{{ post.id }}"
-    class="btn btn-danger btn-sm"> Unlike </button>
-  {% else %}
-    <button type="submit" name="post_id", value="{{ post.id }}"
-    class="btn btn-primary btn-sm"> Like </button>
+<!-- {% if user.is_authenticated %} -->
+  <form action="{% url 'post-like' object.id %}" method="POST">
+	{% csrf_token %}
 
-  {% endif %}
-{% else %}
-  <strong><a href="{% url 'login' %}"> Login </a>
-    Now To Like This Post </strong>
-{% endif %}
-
-    - {{ total_likes }} Likes
-</form>
+	{% if liked %}
+	<button type="submit" name="post_id" value="{{post.id}}" class="btn btn-info">Unlike</button>
+	{% else %}
+	<button type="submit" name="post_id" value="{{post.id}}" class="btn btn-info">Like</button>
+	{% endif %}
+  </form>
+<!-- {% else %}
+  <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
+{% endif %} -->
+<strong class="text-secondary">{{ total_likes }} Like{{ total_likes|pluralize }}</strong>
 
 
 <hr>
