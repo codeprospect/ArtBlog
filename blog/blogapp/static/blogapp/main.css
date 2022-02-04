@@ -2,8 +2,8 @@ html{
   height: 100%;
 }
 body {
-  background: url(../images/book.jpg);
-  /* background: #fafafa; */
+  /* background: url(../images/book.jpg); */
+  background-color: rgba(53, 81, 120, 0.322);
   color: #333333;
   margin-top: 5rem;
   width: 100%;

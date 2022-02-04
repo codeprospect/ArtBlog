@@ -11,7 +11,7 @@ footer {
       font-family: lato;
       color: #fff;
       position: relative;
-      border-bottom: 1px solid #cecece;
+      /* border-bottom: 1px solid #09f143; */
   }
 
   .footer-toggle {
@@ -100,10 +100,10 @@ footer {
 
       .social-links a {
           color: #fff;
-          font-size: 20px;
-          border: 1px solid;
+          font-size: 25px;
+          /* border: 1px solid; */
           border-radius: 20px;
-          background-color: rgba(255, 255, 255, 0.2);
+          background-color: rgb(53, 81, 120);
           margin: 0 10px 10px 0;
           text-align: center;
           -webkit-transition:all .2s ease-in;
@@ -126,11 +126,16 @@ footer {
               text-align:center;
           }
 
+          .fab{
+              margin-right: 15px;
+          }
+
   #copyright {
       text-align: center;
       color:#fff;
       font-family: lato;
       margin: 0;
+      border-top: 1px solid #d6dad7;
   }
 
 #owner {
