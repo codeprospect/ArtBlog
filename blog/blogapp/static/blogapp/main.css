@@ -62,13 +62,17 @@ a.article-title:hover {
 }
 
 .article-img {
-  height: 65px;
+  /* height: 65px;
   width: 65px;
   object-fit: contain;
-  /* margin-right: 16px; */
+  margin-right: 16px;
   width: 200px;
   height: 300px;
-  object-fit: contain;
+  object-fit: contain; */
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
 }
 
 .article-metadata {
