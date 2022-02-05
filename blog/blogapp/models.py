@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
-
+import readtime
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -11,6 +11,11 @@ class Post(models.Model):
     date = models.DateTimeField(default = timezone.now)
     author = models.ForeignKey(User, on_delete = models.CASCADE)
     likes = models.ManyToManyField(User, blank=True,related_name="blog_posts")
+
+    # Readtime function
+    def get_readtime(self):
+        result = readtime.of_text(self.content)
+        return result.text
 
     def total_likes(self):
         return self.likes.count()

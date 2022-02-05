@@ -8,6 +8,7 @@
       <div class="article-metadata">
         <a class="mr-2" href="{% url 'user-posts' object.author.username %}"><strong>{{ object.author }}</strong></a>
         <small class="text-muted"><strong>{{ object.date|date:"F d, Y" }}</strong></small>
+        <p class="text-muted">{{ post.get_readtime}} Read</p>
 
         <!-- To update and delete posts -->
         {% if object.author == user %}
