@@ -4,8 +4,22 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 import readtime
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    class Meta:
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.name + ' | ' + str(self.author)
+
+    def get_absolute_url(self):
+        return reverse('post-detail')
+
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
+    # category = models.ForeignKey(Category, on_delete = models.CASCADE, default=False, null=True, db_constraint=False)
+    category = models.CharField(max_length=255,default='Personal', null=True)
     image = models.ImageField(null=True, blank=True, upload_to="images/")
     content = models.TextField()
     date = models.DateTimeField(default = timezone.now)

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from .forms import PostSearchForm, PostCommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
@@ -65,11 +65,17 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'image']
+    fields = ['title', 'category', 'content', 'image']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class PostCategoryView(CreateView):
+    model = Category
+    template_name = 'post_category.html'
+    fields = '__all__'
 
 
 class PostCommentView(CreateView):
@@ -88,7 +94,7 @@ class PostCommentView(CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'category', 'content', 'image']
 
 #The author is the current logged in user account
 #A blog is automatically allocated to its logged in user, integrity check

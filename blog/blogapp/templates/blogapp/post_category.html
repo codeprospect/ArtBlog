@@ -4,13 +4,12 @@
     <div class="content-section">
       <form method="Post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.media }}
         <fieldset class = "form-group">
-          <legend class ="border-bottom mb-4"><b> New Blog Post </b></legend>
+          <legend class ="border-bottom mb-4"><b> Add A New Category </b></legend>
           {{ form|crispy }}
         </fieldset>
         <div class="form-group">
-          <button class="btn btn-outline-info" type="submit"> Post </button>
+          <button class="btn btn-outline-info" type="submit"> Add Category </button>
         </div>
       </form>
     </div>

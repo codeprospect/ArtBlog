@@ -9,7 +9,7 @@
       <div class="article-metadata">
         <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
         <small class="text-muted"><strong>{{ post.date|date:"F d, Y" }}</strong></small>
-        <p class="text-muted">{{ post.get_readtime}} Read</p>
+        <p class="text-muted">{{ post.get_readtime}} read</p>
 
       </div>
       <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
