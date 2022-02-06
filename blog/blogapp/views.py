@@ -74,7 +74,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostCategoryView(CreateView):
     model = Category
-    template_name = 'post_category.html'
+    template_name = 'blogapp/post_category.html'
     fields = '__all__'
 
 
