@@ -1,0 +1,16 @@
+{% extends "blogapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <form method="Post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class = "form-group">
+          <legend class ="border-bottom mb-4"><b> Add A New Category </b></legend>
+          {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+          <button class="btn btn-outline-info" type="submit"> Add Category </button>
+        </div>
+      </form>
+    </div>
+{% endblock content %}

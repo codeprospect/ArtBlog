@@ -2,15 +2,34 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+import readtime
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    class Meta:
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.name + ' | ' + str(self.author)
+
+    def get_absolute_url(self):
+        return reverse('post-detail')
 
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
+    # category = models.ForeignKey(Category, on_delete = models.CASCADE, default=False, null=True, db_constraint=False)
+    category = models.CharField(max_length=255,default='Personal', null=True)
     image = models.ImageField(null=True, blank=True, upload_to="images/")
     content = models.TextField()
     date = models.DateTimeField(default = timezone.now)
     author = models.ForeignKey(User, on_delete = models.CASCADE)
     likes = models.ManyToManyField(User, blank=True,related_name="blog_posts")
+
+    # Readtime function
+    def get_readtime(self):
+        result = readtime.of_text(self.content)
+        return result.text
 
     def total_likes(self):
         return self.likes.count()
