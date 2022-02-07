@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="{% static 'blogapp/main.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'blogapp/footer.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'blogapp/article.css' %}">
-
+  <link rel="stylesheet" type="text/css" href="{% static 'blogapp/about.css' %}">
 
   {% if title %}
     <title> FREEBIES - {{ title }}</title>
@@ -80,13 +80,12 @@
             </p>
           </div>
         </div>
+      </div>
 
-        <div class="col-md-4">
-          <h3> Categories </h3>
-          <a href="{% url 'post-create' %}"> Add Post </a></li>
-          <a href="{% url 'post-category' %}"> Add Category </a></li>
-        </div>
-
+      <div class="col-md-4">
+        <h3> Categories </h3>
+        <a href="{% url 'post-create' %}"> Add Post </a></li>
+        <a href="{% url 'post-category' %}"> Add Category </a></li>
       </div>
     </main>
 
@@ -111,18 +110,18 @@
           <footer class="footer footer-expand-md footer-dark">
             <div class="container">
               <div class="row mb-5">
-                <div class="col-4">
+                <div class="col-3">
                     <div class="link-cat" >
                         <span class="footer-cat">FreeBies</span>
                     </div>
 
                     <ul class="footer-cat-links">
-                        <li><a href=""><span>About Us</span></a></li>
+                        <li><a href="{% url 'blogapp-about' %}"><span>About Us</span></a></li>
                         <!-- <li><a href=""><span> Our Services</span></a></li>
                         <li><a href=""><span>Privacy Policy</span></a></li> -->
                     </ul>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="link-cat" >
                         <span class="footer-cat">Get Support</span>
                     </div>
@@ -138,7 +137,7 @@
                         <li><a href="{% url 'blogapp-home' %}"><span>Categories</span></a></li>
                     </ul>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="link-cat" >
                         <span class="footer-cat">Follow Us</span>
                     </div>
