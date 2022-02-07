@@ -114,3 +114,7 @@ a.article-title:hover {
   border: none;
   color: white;
 }
+
+.btn-update .btn-delete:hover{
+  background-color: aqua;
+}

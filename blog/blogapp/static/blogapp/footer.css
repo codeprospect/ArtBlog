@@ -35,7 +35,7 @@ footer {
     content: '';
     position: absolute;
     bottom: -10px;
-    background-color: #5481bf;
+    /* background-color: #5481bf; */
     height: 2px;
     box-sizing: border-box;
     width: 50px;
@@ -84,10 +84,10 @@ footer {
           left: 0;
       }
 
-  .col-3 {
+  /* .col-4 {
       display: inline-table;
       width:25%;
-  }
+  } */
 
 
 
@@ -117,7 +117,7 @@ footer {
       .social-links a:hover, .social-links a:focus {
           /* background-color: #212121; */
           color: #24262b;
-          background-color: #ffffff;
+          /* background-color: #ffffff; */
       }
 
           .social-links a i {
