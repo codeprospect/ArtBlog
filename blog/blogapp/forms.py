@@ -11,11 +11,12 @@ for item in choices:
 class PostForm(forms.ModelForm):
     class  Meta:
         model = Post
-        fields = ('title', 'category', 'content', 'image')
+        fields = ('title', 'category', 'snippet', 'content', 'image')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'category': forms.Select(choices=choice_list, attrs={'class': 'form-control'}),
+            'snippet': forms.Textarea(attrs={'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
             'image': forms.FileInput(attrs={'class': 'form-control'}),
         }
