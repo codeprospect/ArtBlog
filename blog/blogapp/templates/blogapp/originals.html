@@ -1,0 +1,49 @@
+{% extends "blogapp/base.html" %}
+{% block content %}
+
+  {% for post in posts %}
+
+  <article class="media content-section">
+    <img class="rounded-circle article-img"  src="{{ post.author.profile.image.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+        <small class="text-muted"><strong>{{ post.date|date:"F d, Y" }}</strong></small>
+        <p class="text-muted">{{ post.get_readtime}} read</p>
+
+      </div>
+      <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+      <p class="article-content">{{ post.content }}</p>
+    </div>
+  </article>
+
+  {% endfor %}
+
+<!-- Pagination -->
+  {% if is_paginated %}
+
+    <!-- Links to First and Prev Pages -->
+    {% if page_obj.has_previous %}
+      <a class="btn btn-outline-info mb-4" href="?page=1"> First Page </a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}"> Previous </a>
+    {% endif %}
+
+    <!-- Links in current page showing sorrounding pages -->
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}"> {{ num }} </a>
+      {% elif num > page_obj.numumber|add:'-3' and num < page_obj.numumber|add:'3' %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ num }}"> {{ num }} </a>
+      {% endif %}
+    {% endfor %}
+
+    <!-- Links to just Next page and Last page -->
+    {% if page_obj.has_next %}
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}"> Next </a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}"> Last Page </a>
+    {% endif %}
+
+
+  {% endif %}
+
+{% endblock content %}

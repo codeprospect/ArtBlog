@@ -31,7 +31,15 @@ class PostListView(ListView):
     model = Post
     template_name = 'blogapp/home.html'
     context_object_name = 'posts'
+    ordering = ['-date']
     paginate_by = 4 #pagination
+
+class PostOriginalView(ListView):
+    model = Post
+    template_name = 'blogapp/originals.html'
+    context_object_name = 'posts'
+    ordering = ['date']
+    paginate_by = 4
 
 
 class UserPostListView(ListView):
