@@ -73,20 +73,22 @@
             <h3> Browse FreeBies </h3> <hr>
             <p class='text-muted'>Here is some more from us
               <ul class="list-group">
-                <li class="list-group-item list-group-item-light"> <a href="{% url 'blogapp-home' %}"> Latest Posts </a></li>
-                <li class="list-group-item list-group-item-light"> <a href="#"> Discounts </a></li>
+                {% if user.is_authenticated %}
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'post-category' %}"> Add Category </a></li>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'post-originals' %}"> Original Posts </a></li>
                 <li class="list-group-item list-group-item-light"> <a href="{% url 'blogapp-about' %}"> About Us </a></li>
+
+                {% else %}
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'post-originals' %}"> Original Posts </a></li>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'blogapp-about' %}"> About Us </a></li>
+                {% endif %}
+
               </ul>
             </p>
           </div>
         </div>
       </div>
 
-      <div class="col-md-4">
-        <h3> Categories </h3>
-        <a href="{% url 'post-create' %}"> Add Post </a></li>
-        <a href="{% url 'post-category' %}"> Add Category </a></li>
-      </div>
     </main>
 
 

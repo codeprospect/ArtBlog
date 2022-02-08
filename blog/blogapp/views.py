@@ -34,6 +34,13 @@ class PostListView(ListView):
     ordering = ['-date']
     paginate_by = 4 #pagination
 
+class PostOriginalView(ListView):
+    model = Post
+    template_name = 'blogapp/originals.html'
+    context_object_name = 'posts'
+    ordering = ['date']
+    paginate_by = 4
+
 
 class UserPostListView(ListView):
     model = Post
@@ -66,7 +73,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'category', 'content', 'image']
+    fields = ['title', 'category', 'snippet', 'content', 'image']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -95,7 +102,7 @@ class PostCommentView(CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'category', 'content', 'image']
+    fields = ['title', 'category', 'snippet', 'content', 'image']
 
 #The author is the current logged in user account
 #A blog is automatically allocated to its logged in user, integrity check

@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 import readtime
+from ckeditor.fields import RichTextField
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -18,10 +19,11 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    # category = models.ForeignKey(Category, on_delete = models.CASCADE, default=False, null=True, db_constraint=False)
     category = models.CharField(max_length=255,default='Personal', null=True)
+    snippet = models.CharField(max_length=255)
     image = models.ImageField(null=True, blank=True, upload_to="images/")
-    content = models.TextField()
+    content = RichTextField(blank=True, null=True)
+    # content = models.TextField()
     date = models.DateTimeField(default = timezone.now)
     author = models.ForeignKey(User, on_delete = models.CASCADE)
     likes = models.ManyToManyField(User, blank=True,related_name="blog_posts")
