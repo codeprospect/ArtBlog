@@ -24,6 +24,8 @@ html {
     height: 100%;
     margin-bottom: 25px;
     /* background-color: rgba(53, 81, 120, 0.014); */
+    background-color: black;
+    color: whitesmoke;
     border: none;
 }
 .team-image{
