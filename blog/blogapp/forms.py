@@ -21,10 +21,8 @@ class PostForm(forms.ModelForm):
             'image': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
-class PostSearchForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ('author', 'title')
+class PostSearchForm(forms.Form):
+    q = forms.CharField()
 
 
 class PostCommentForm(forms.ModelForm):

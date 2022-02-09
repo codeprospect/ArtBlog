@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Comment, Category
-from .forms import PostSearchForm, PostCommentForm
+from .forms import PostForm, PostSearchForm, PostCommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
@@ -157,6 +157,23 @@ def post_detail(request, year, month, day, post):
                     'new_comment': new_comment,
                     'comment_form': comment_form})
 
+
+def post_search(request):
+    form = PostSearchForm()
+    q = ''
+    results = []
+
+    if 'q' in request.GET:
+        form = PostSearchForm(request.GET)
+        if form.is_valid():
+            q = form.cleaned_data['q']
+            results = Post.objects.filter(title__contains=q)
+
+
+    return render(request, 'blogapp/post_search.html',
+                    {'form': form,
+                    'q': q,
+                    'results': results})
 
 # form = PostSearchForm(request.POST or None)
 # queryset = Post.objects.all()

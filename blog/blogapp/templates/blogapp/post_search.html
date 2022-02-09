@@ -1,0 +1,36 @@
+{% extends "blogapp/base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+  <form class="search" method="get">
+    {% csrf_token %}
+    <fieldset class = "form-group">
+      <legend class ="border-bottom mb-4"><b> Search A Post </b></legend>
+      {{ form|crispy }}
+    </fieldset>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit"> Search </button>
+    </div>
+  </form>
+
+
+  {%if q%}
+  <h3>Posts That Have "{{ q }}"</h3>
+  <p>
+    {% with results.count as total_results %}
+    Found {{ total_results }} result {{ total_results|pluralize }}
+    {% endwith %}
+  </p>
+
+  {% for post in results %}
+
+    <h5><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h5>
+    {% empty %}
+    <p> Sorry. There are no results for your search. Please search again using another keyword. </p>
+
+  {% endfor %}
+
+  {%endif%}
+
+{% endblock content %}
