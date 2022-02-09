@@ -23,6 +23,11 @@ class PostForm(forms.ModelForm):
 
 class PostSearchForm(forms.Form):
     q = forms.CharField()
+    c = forms.ModelChoiceField(queryset=Category.objects.all().order_by('name'))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['c'].required = False
 
 
 class PostCommentForm(forms.ModelForm):
