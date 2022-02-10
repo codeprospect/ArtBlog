@@ -3,9 +3,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Comment, Category
-from .forms import PostSearchForm, PostCommentForm
+from .forms import PostForm, PostSearchForm, PostCommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 
 def home(request):
     context = {
@@ -157,6 +158,31 @@ def post_detail(request, year, month, day, post):
                     'new_comment': new_comment,
                     'comment_form': comment_form})
 
+# The Search Functionality
+def post_search(request):
+    form = PostSearchForm()
+    q = ''
+    c = ''
+    results = []
+    query = Q()
+
+    if 'q' in request.GET:
+        form = PostSearchForm(request.GET)
+        if form.is_valid():
+            q = form.cleaned_data['q']
+            c = form.cleaned_data['c']
+
+            if c is not None:
+                query &= Q(category=c)
+            if q is not None:
+                query &= Q(title__contains=q)
+
+            results = Post.objects.filter(query)
+
+    return render(request, 'blogapp/post_search.html',
+                    {'form': form,
+                    'q': q,
+                    'results': results})
 
 # form = PostSearchForm(request.POST or None)
 # queryset = Post.objects.all()

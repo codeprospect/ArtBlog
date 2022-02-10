@@ -21,10 +21,13 @@ class PostForm(forms.ModelForm):
             'image': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
-class PostSearchForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ('author', 'title')
+class PostSearchForm(forms.Form):
+    q = forms.CharField()
+    c = forms.ModelChoiceField(queryset=Category.objects.all().order_by('name'))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['c'].required = False
 
 
 class PostCommentForm(forms.ModelForm):
