@@ -37,6 +37,11 @@ html {
   height: 87%;
   width: 100%;
 }
+.story-img{
+  float: left;
+    width: 131px;
+    margin: 10px 30px 20px 0;
+}
 .team-content{
     padding-top: 30px;
     margin-bottom: 30px;
@@ -45,6 +50,9 @@ html {
 }
 .row{
     margin-bottom: 30px;
+}
+.about-us{
+  margin-bottom: 5em;
 }
 
 /* .card {
