@@ -15,5 +15,6 @@ urlpatterns = [
     path('post/<int:pk>/comment/', PostCommentView.as_view(), name = 'post-comment'),
     path('post/like/<int:pk>/', LikeView, name = 'post-like'),
     path('originals/', PostOriginalView.as_view(), name = 'post-originals'),
+    path('post/contact/', views.contact, name = 'post-contact'),
     path('about/', views.about, name = 'blogapp-about'),
 ]

@@ -1,11 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Comment, Category
-from .forms import PostForm, PostSearchForm, PostCommentForm
+from .forms import PostForm, PostSearchForm, PostCommentForm, PostContactForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+from django.core.mail import send_mail, BadHeaderError
 from django.db.models import Q
 
 def home(request):
@@ -184,6 +185,28 @@ def post_search(request):
                     'q': q,
                     'results': results})
 
+
+def contact(request):
+	if request.method == 'POST':
+		form = PostContactForm(request.POST)
+		if form.is_valid():
+			subject = "Website Inquiry"
+			body = {
+			'first_name': form.cleaned_data['first_name'],
+			'last_name': form.cleaned_data['last_name'],
+			'email': form.cleaned_data['email_address'],
+			'message':form.cleaned_data['message'],
+			}
+			message = "\n".join(body.values())
+
+			try:
+				send_mail(subject, message, 'admin@example.com', ['admin@example.com'])
+			except BadHeaderError:
+				return HttpResponse('Invalid header found.')
+			return redirect ("blogapp-home")
+
+	form = PostContactForm()
+	return render(request, "blogapp/contact.html", {'form':form})
 # form = PostSearchForm(request.POST or None)
 # queryset = Post.objects.all()
 # context = {
