@@ -207,15 +207,3 @@ def contact(request):
 
 	form = PostContactForm()
 	return render(request, "blogapp/contact.html", {'form':form})
-# form = PostSearchForm(request.POST or None)
-# queryset = Post.objects.all()
-# context = {
-#     "queryset": queryset,
-# }
-#
-# if request.method == 'POST':
-#     queryset = Post.objects.filter(author_icontains=form['author'].value(), title_icontains=form['title'].value())
-#
-#     context = {
-#     "queryset": queryset,
-#     }

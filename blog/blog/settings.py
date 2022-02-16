@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blogapp.apps.BlogappConfig',
     'crispy_forms',
     'ckeditor',
+    'django_social_share',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

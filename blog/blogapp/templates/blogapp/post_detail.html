@@ -1,6 +1,7 @@
 {% extends "blogapp/base.html" %}
 {% block content %}
 {% load crispy_forms_tags %}
+{% load social_share %}
 
   <article class="media content-section">
     <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
@@ -21,6 +22,8 @@
       </div>
       <p class="text-muted">{{ post.get_readtime}} read</p>
       <h2 class="article-title">{{ object.title }}</h2> <br>
+
+      {% post_to_twitter "New Song: {{ object.title }}" object_or_url "Post to Twitter" %}
 
       {% if object.image %}
 
